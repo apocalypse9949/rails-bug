@@ -135,6 +135,7 @@ module RailInspector
 
           parse_line
         end
+        pop_entry
 
         @entries
       end
@@ -154,15 +155,17 @@ module RailInspector
         end
 
         def parse_release_header
-          @buffer.scan(
+          count = @buffer.scan(
             /#{RELEASE_HEADER} .*##\s*/o
-          )
+          ).count("\n")
+          @current_line += count
         end
 
         def parse_footer
-          @buffer.scan(
+          count = @buffer.scan(
             /#{FOOTER_TEXT} \[\d-\d-stable\]\(.*\) for previous changes\.\n/o
-          )
+          ).count("\n")
+          @current_line += count
         end
 
         def peek_probably_header?
