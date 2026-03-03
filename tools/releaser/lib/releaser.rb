@@ -3,6 +3,7 @@
 require "json"
 require "digest"
 require "rake/tasklib"
+require "pathname"
 
 class Releaser < Rake::TaskLib
   # Order dependent. E.g. Action Mailbox depends on Active Record so it should be after.
